@@ -1,0 +1,215 @@
+
+views:
+  - theme: Backend-selected
+    title: Switches
+    path: switches
+    icon: mdi:monitor-dashboard
+    visible:
+      - user: 82be2dc259e84bde90b6af38554ade54
+      - user: 7636aa83482a430b84ca92bf119ac27a
+      - user: ac0fee36d0cd471fb735592659eb5e3f
+      - user: 3ef5af91e08e4644a0fc798df9d3cd90
+      - user: 07e899195ac0425f9fdc328950e516b9
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 25% 25% 50%
+      grid-template-rows: auto
+      grid-template-areas: |
+        'left climate right'  
+      mediaquery:
+        '(min-width: 4000px)':
+          grid-template-columns: 25% 25% 50%
+          grid-template-rows: auto
+          grid-template-areas: |
+            'left climate right'  
+        '(max-width: 1170px)':
+          grid-template-columns: 100%
+          grid-template-rows: auto
+          grid-template-areas: |
+            "left"
+            "climate"
+            "right"
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.office_floor_lamp
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            collapsible_controls: true
+          - type: custom:mushroom-light-card
+            entity: light.kitchen_pendant
+            icon: hue:pendant-cher
+            use_light_color: true
+            show_brightness_control: true
+            collapsible_controls: true
+          - type: custom:mushroom-light-card
+            entity: light.living_room_lamp
+            use_light_color: true
+            show_brightness_control: true
+            collapsible_controls: true
+            show_color_temp_control: true
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: switch.patio
+                name: Patio
+                icon: mdi:string-lights
+                fill_container: true
+                layout: vertical
+                tap_action:
+                  action: toggle
+              - type: custom:mushroom-entity-card
+                entity: switch.sally
+                name: Sally
+                layout: vertical
+                tap_action:
+                  action: toggle
+              - type: custom:mushroom-entity-card
+                entity: switch.office_plug_outlet
+                name: Office Lamp
+                layout: vertical
+                tap_action:
+                  action: toggle
+              - type: custom:mushroom-entity-card
+                entity: switch.christmas_tree_socket_1
+                name: Xmas Tree
+                layout: vertical
+                tap_action:
+                  action: toggle
+          - type: custom:mushroom-light-card
+            entity: light.katelyn_light
+            icon: mdi:globe-light
+            name: Katelyn's Light
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            collapsible_controls: true
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - type: custom:fold-entity-row
+                    card_mod:
+                      style: |
+                        :host { 
+                          {% if is_state('sensor.top_load_washer', 'on') %} 
+                          --card-mod-icon-color: var(--switch-checked-color);
+                          {% else %} 
+                          --card-mod-icon-color: var(switch-unchecked-button-color); 
+                          {% endif %}
+                        }
+                    head: sensor.top_load_washer
+                    entities:
+                      - entity: sensor.top_load_washer_initial_time
+                        name: Initial
+                        state_color: true
+                      - entity: sensor.top_load_washer_remaining_time
+                        name: Remaining
+                        state_color: true
+                      - entity: sensor.top_load_washer_run_state
+                        name: State
+                        state_color: true
+                state_color: true
+              - type: entities
+                state_color: true
+                entities:
+                  - type: custom:fold-entity-row
+                    card_mod:
+                      style: |
+                        :host { 
+                          {% if is_state('sensor.dryer', 'on') %} 
+                          --card-mod-icon-color: var(--switch-checked-color);
+                          {% else %} 
+                          --card-mod-icon-color: var(switch-unchecked-button-color); 
+                          {% endif %}
+                        }
+                    head: sensor.dryer
+                    entities:
+                      - entity: sensor.dryer_initial_time
+                        name: Initial
+                        state_color: true
+                      - entity: sensor.dryer_remaining_time
+                        name: Remaining
+                        state_color: true
+                      - entity: sensor.dryer_run_state
+                        name: State
+                        state_color: true
+        view_layout:
+          grid-area: left
+      - square: true
+        columns: 1
+        type: grid
+        cards:
+          - type: custom:weather-radar-card
+            data_source: RainViewer-TWC
+            show_marker: true
+            show_scale: true
+            show_zoom: true
+            show_playback: true
+            show_range: true
+            show_recenter: true
+            center_latitude: XXXXXXXXXXX
+            center_longitude: XXXXXXXXXXXXX
+            map_style: Satellite
+            zoom_level: 6
+            extra_labels: true
+            square_map: true
+        view_layout:
+          grid-area: right
+      - type: vertical-stack
+        cards:
+          - type: custom:clock-weather-card
+            entity: weather.home
+            title: ''
+            sun_entity: sun.sun
+            weather_icon_type: fill
+            animated_icon: true
+            forecast_days: 5
+            locale: en
+            time_format: 12
+            date_pattern: LLL dd, y
+            hide_today_section: false
+            hide_forecast_section: false
+          - type: custom:hourly-weather
+            name: ''
+            entity: weather.kfty_hourly
+            num_segments: '18'
+            icons: true
+            show_precipitation_amounts: false
+            label_spacing: '4'
+          - type: custom:mushroom-climate-card
+            entity: climate.living_room
+            show_temperature_control: true
+            hvac_modes:
+              - heat_cool
+              - heat
+              - cool
+            collapsible_controls: false
+            fill_container: true
+          - type: custom:mushroom-climate-card
+            entity: climate.upstairs
+            fill_container: true
+            hvac_modes:
+              - heat_cool
+              - heat
+              - cool
+              - 'off'
+            show_temperature_control: true
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.bedroom_humidity_temperature
+                name: Bedroom Temp
+                layout: vertical
+              - type: custom:mushroom-entity-card
+                entity: sensor.bedroom_humidity_humidity
+                name: Bedroom Humidity
+                fill_container: true
+                layout: vertical
+        view_layout:
+          grid-area: climate

@@ -1,0 +1,723 @@
+  - theme: Backend-selected
+    title: Monitor Dashboard
+    path: monitor_dashboard
+    type: custom:horizontal-layout
+    layout:
+      max_cols: 5
+      width: 300
+      max_width: 1000
+    icon: si:raspberrypi
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - chart_type: line
+            period: hour
+            days_to_show: 30
+            type: statistics-graph
+            entities:
+              - sensor.home_assistant_v2_db_size
+            stat_types:
+              - mean
+            title: Database
+          - chart_type: line
+            period: hour
+            days_to_show: 30
+            type: statistics-graph
+            entities:
+              - sensor.disk_use_percent_config
+            stat_types:
+              - mean
+            title: Disk
+        view_layout:
+          column: 5
+      - type: vertical-stack
+        cards:
+          - chart_type: line
+            period: hour
+            days_to_show: 30
+            type: statistics-graph
+            entities:
+              - sensor.memory_use_percent
+            stat_types:
+              - mean
+            title: Memory
+          - chart_type: line
+            period: hour
+            days_to_show: 30
+            type: statistics-graph
+            entities:
+              - sensor.swap_use_percent
+            stat_types:
+              - mean
+            title: Swap
+        view_layout:
+          column: 4
+      - type: custom:apexcharts-card
+        experimental:
+          color_threshold: true
+        graph_span: 5d
+        show:
+          last_updated: true
+          loading: false
+        header:
+          standard_format: false
+          show: true
+          show_states: true
+          colorize_states: true
+          title: Raspberry Pi 4 CPU
+        now:
+          show: true
+          color: red
+          label: Now
+        span:
+          start: day
+          offset: '-4d'
+        series:
+          - entity: sensor.processor_use
+            color: '#CC5500'
+            name: Processor Usage
+            stroke_width: 1
+            group_by:
+              duration: 2min
+            show:
+              extremas: true
+              header_color_threshold: true
+          - entity: sensor.processor_temperature
+            color: '#9C3587'
+            stroke_width: 1
+            group_by:
+              duration: 2min
+            show:
+              extremas: true
+              header_color_threshold: true
+        view_layout:
+          column: 4
+      - type: history-graph
+        entities:
+          - entity: sun.sun
+            name: sun
+          - entity: remote.harmony_hub
+            name: Harmony
+          - entity: automation.restart_harmony
+            name: Harmony Reset
+          - entity: media_player.sonos
+          - entity: media_player.roku
+          - entity: media_player.samsung_8_series_55
+            name: TV
+          - entity: switch.office_light_socket_1
+            name: Office Lamp
+          - entity: media_player.living_room_2
+            name: Denon
+          - entity: automation.amazon_fire_power_management
+            name: Fire HD
+          - entity: automation.patio_lights
+            name: Patio
+          - entity: sensor.hvac_living_room_activity
+            name: LR Climate
+          - entity: sensor.hvac_upstairs_activity
+            name: Up Climate
+        hours_to_show: 24
+        title: State History
+        view_layout:
+          column: 1
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.dining_room_motion
+          - entity: binary_sensor.hatch_back_patio_motion
+          - entity: binary_sensor.hatch_front_porch_motion_motion
+          - entity: binary_sensor.living_room_motion
+          - entity: binary_sensor.front_door_entry
+          - entity: binary_sensor.hatch_driveway_motion
+          - entity: binary_sensor.hatch_grill_porch_motion
+        title: Motion
+        hours_to_show: 24
+        view_layout:
+          column: 1
+      - type: entities
+        entities:
+          - entity: sensor.school2
+            icon: mdi:car
+            card_mod:
+              style: |
+                :host {
+                  {% if (state_attr('sensor.school2','duration')|float) >= 20.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (state_attr('sensor.school2','duration')|float) <= 20.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.school2_return
+            card_mod:
+              style: |
+                :host {
+                  {% if (state_attr('sensor.school2_return','duration')|float) >= 20.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (state_attr('sensor.school2_return','duration')|float) <= 20.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.school1
+            card_mod:
+              style: |
+                :host {
+                  {% if (state_attr('sensor.school1','duration')|float) >= 20.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (state_attr('sensor.school1','duration')|float) <= 20.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.school1_return
+            card_mod:
+              style: |
+                :host {
+                  {% if (state_attr('sensor.school1_return','duration')|float) >= 20.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (state_attr('sensor.school1_return','duration')|float) <= 20.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.round_trip_h2p
+            name: 1to2
+            icon: mdi:counter
+            card_mod:
+              style: |
+                :host {
+                  {% if (states('sensor.round_trip_h2p')|float) >= 50.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (states('sensor.round_trip_h2p')|float) <= 50.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.school2_round_trip
+            name: 2to1
+            icon: mdi:counter
+            card_mod:
+              style: |
+                :host {
+                  {% if (states('sensor.school2_round_trip')|float) >= 50.0 %}
+                      color: red;
+                      --card-mod-icon-color: red;
+                  {% elif (states('sensor.school2_round_trip')|float) <= 50.0 %}
+                      color: green;
+                      --card-mod-icon-color: green;
+                  {% endif %}
+                }
+          - entity: sensor.waze_travel_time
+        title: Drive Time
+        state_color: true
+        view_layout:
+          column: 4
+      - type: vertical-stack
+        cards:
+          - type: custom:apexcharts-card
+            apex_config:
+              chart:
+                height: 200px
+            experimental:
+              color_threshold: true
+            graph_span: 7d
+            span:
+              end: day
+            show:
+              last_updated: true
+            header:
+              show: true
+              colorize_states: true
+              title: Daily Temperature
+            yaxis:
+              - decimals: 0
+                apex_config:
+                  tickAmount: 4
+            series:
+              - entity: sensor.kfty_temperature
+                show:
+                  header_color_threshold: true
+                  extremas: true
+                type: area
+                name: Temperature
+                group_by:
+                  func: last
+                  duration: 3h
+                stroke_width: 2
+                color_threshold:
+                  - value: 30
+                    color: dodgerblue
+                  - value: 40
+                    color: darkcyan
+                  - value: 50
+                    color: goldenrod
+                  - value: 70
+                    color: orangered
+                  - value: 80
+                    color: darkred
+              - entity: sensor.kfty_heat_index
+                type: line
+                name: Heat Index
+                color: red
+                group_by:
+                  func: avg
+                  duration: 2h
+                stroke_width: 1
+              - entity: sensor.kfty_wind_chill
+                type: line
+                name: Wind Chill
+                color: blue
+                group_by:
+                  func: avg
+                  duration: 2h
+                stroke_width: 1
+          - type: custom:apexcharts-card
+            view_layout:
+              column: 1
+            apex_config:
+              chart:
+                height: 150px
+            experimental:
+              color_threshold: true
+            graph_span: 7d
+            span:
+              end: day
+            show:
+              last_updated: true
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+              title: Downstairs HVAC Activity
+            yaxis:
+              - min: 0
+                max: ~5
+                decimals: 0
+                apex_config:
+                  tickAmount: 4
+            series:
+              - entity: sensor.living_room_heating_today
+                show:
+                  header_color_threshold: true
+                  extremas: true
+                  as_duration: hour
+                type: column
+                name: Heating
+                group_by:
+                  func: last
+                  duration: 1d
+                color_threshold:
+                  - value: 1
+                    color: dodgerblue
+                  - value: 3
+                    color: darkcyan
+                  - value: 5
+                    color: goldenrod
+                  - value: 7
+                    color: orangered
+                  - value: 10
+                    color: darkred
+              - entity: sensor.living_room_cooling_today
+                show:
+                  header_color_threshold: true
+                  extremas: true
+                  as_duration: hour
+                type: column
+                name: Cooling
+                group_by:
+                  func: last
+                  duration: 1d
+                color: skyblue
+          - type: custom:apexcharts-card
+            view_layout:
+              column: 1
+            apex_config:
+              chart:
+                height: 150px
+            experimental:
+              color_threshold: true
+            graph_span: 7d
+            span:
+              end: day
+            show:
+              last_updated: true
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+              title: Upstairs HVAC Activity
+            yaxis:
+              - min: 0
+                max: ~5
+                decimals: 0
+                apex_config:
+                  tickAmount: 4
+            series:
+              - entity: sensor.upstairs_heating_today
+                show:
+                  header_color_threshold: true
+                  extremas: true
+                  as_duration: hour
+                type: column
+                name: Heating
+                group_by:
+                  func: last
+                  duration: 1d
+                color_threshold:
+                  - value: 1
+                    color: dodgerblue
+                  - value: 3
+                    color: darkcyan
+                  - value: 5
+                    color: goldenrod
+                  - value: 7
+                    color: orangered
+                  - value: 10
+                    color: darkred
+              - entity: sensor.upstairs_cooling_today
+                show:
+                  header_color_threshold: true
+                  extremas: true
+                  as_duration: hour
+                type: column
+                name: Cooling
+                group_by:
+                  func: last
+                  duration: 1d
+                color: skyblue
+        view_layout:
+          column: 2
+      - type: vertical-stack
+        cards:
+          - type: custom:apexcharts-card
+            experimental:
+              color_threshold: true
+            graph_span: 24h
+            show:
+              last_updated: true
+            header:
+              standard_format: false
+              show: true
+              show_states: true
+              colorize_states: true
+              title: Living Room Temperature
+            now:
+              show: true
+              color: red
+              label: Now
+            span:
+              start: day
+            apex_config:
+              chart:
+                height: 200px
+            yaxis:
+              - id: temp
+                show: true
+                min: ~66
+                max: ~74
+                apex_config:
+                  tickAmount: 4
+              - id: humidity
+                min: ~40
+                max: ~55
+                apex_config:
+                  tickAmount: 4
+                show: true
+                opposite: true
+            series:
+              - entity: sensor.living_room_temperature
+                yaxis_id: temp
+                type: column
+                group_by:
+                  func: last
+                  duration: 30m
+                stroke_width: 5
+                show:
+                  extremas: true
+                  header_color_threshold: true
+                color_threshold:
+                  - value: 68
+                    color: steelblue
+                  - value: 69
+                    color: blue
+                  - value: 70
+                    color: orange
+                  - value: 71
+                    color: orangered
+                  - value: 72
+                    color: red
+              - entity: sensor.living_room_temperature
+                yaxis_id: temp
+                show:
+                  legend_value: false
+                  in_header: false
+                type: line
+                color: white
+                group_by:
+                  func: last
+                  duration: 60m
+                stroke_width: 2
+              - entity: sensor.living_room_humidity
+                yaxis_id: humidity
+                show:
+                  in_chart: true
+                stroke_width: 2
+                color: blue
+                type: area
+          - type: custom:apexcharts-card
+            experimental:
+              color_threshold: true
+            graph_span: 24h
+            show:
+              last_updated: true
+            header:
+              standard_format: false
+              show: true
+              show_states: true
+              colorize_states: true
+              title: Upstair Temperature
+            now:
+              show: true
+              color: red
+              label: Now
+            span:
+              start: day
+            apex_config:
+              chart:
+                height: 200px
+            yaxis:
+              - id: temp
+                show: true
+                min: ~66
+                max: ~74
+                apex_config:
+                  tickAmount: 4
+              - id: humidity
+                min: ~40
+                max: ~55
+                show: true
+                opposite: true
+                apex_config:
+                  tickAmount: 4
+            series:
+              - entity: sensor.upstairs_temperature
+                yaxis_id: temp
+                type: column
+                group_by:
+                  func: last
+                  duration: 30m
+                stroke_width: 5
+                show:
+                  extremas: true
+                  header_color_threshold: true
+                color_threshold:
+                  - value: 68
+                    color: steelblue
+                  - value: 69
+                    color: blue
+                  - value: 70
+                    color: orange
+                  - value: 71
+                    color: orangered
+                  - value: 72
+                    color: red
+              - entity: sensor.upstairs_temperature
+                yaxis_id: temp
+                show:
+                  legend_value: false
+                  in_header: false
+                type: line
+                color: white
+                group_by:
+                  func: last
+                  duration: 60m
+                stroke_width: 2
+              - entity: sensor.upstairs_humidity
+                yaxis_id: humidity
+                show:
+                  in_chart: true
+                stroke_width: 2
+                color: blue
+                type: area
+          - type: custom:apexcharts-card
+            experimental:
+              color_threshold: true
+            graph_span: 24h
+            show:
+              last_updated: true
+            header:
+              standard_format: false
+              show: true
+              show_states: true
+              colorize_states: true
+              title: Bedroom Temperature
+            now:
+              show: true
+              color: red
+              label: Now
+            span:
+              start: day
+            yaxis:
+              - id: temp
+                show: true
+                min: ~66
+                max: ~74
+                apex_config:
+                  tickAmount: 4
+              - id: humidity
+                min: ~40
+                apex_config:
+                  tickAmount: 4
+                max: ~55
+                show: true
+                opposite: true
+            series:
+              - entity: sensor.bedroom_humidity_temperature
+                yaxis_id: temp
+                type: column
+                group_by:
+                  func: last
+                  duration: 30m
+                stroke_width: 5
+                show:
+                  extremas: true
+                  header_color_threshold: true
+                color_threshold:
+                  - value: 68
+                    color: steelblue
+                  - value: 69
+                    color: blue
+                  - value: 70
+                    color: orange
+                  - value: 71
+                    color: orangered
+                  - value: 72
+                    color: red
+              - entity: sensor.bedroom_humidity_temperature
+                yaxis_id: temp
+                show:
+                  legend_value: false
+                  in_header: false
+                type: line
+                color: white
+                group_by:
+                  func: last
+                  duration: 60m
+                stroke_width: 2
+              - entity: sensor.bedroom_humidity_humidity
+                yaxis_id: humidity
+                show:
+                  in_chart: true
+                color: blue
+                stroke_width: 2
+                type: area
+                opacity: 0.5
+        view_layout:
+          column: 3
+      - chart_type: line
+        period: hour
+        days_to_show: 1
+        type: statistics-graph
+        entities:
+          - entity: sensor.speedtest_download
+            name: Download
+          - entity: sensor.speedtest_upload
+            name: Upload
+        stat_types:
+          - mean
+          - min
+          - max
+        title: Speedtest
+        view_layout:
+          column: 5
+      - square: false
+        columns: 2
+        type: grid
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.fire_tablet_battery
+            icon_color: green
+          - type: custom:mushroom-entity-card
+            entity: switch.office_light_socket_1
+            icon_color: green
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: sensor.bedroom_humidity_humidity
+            icon_color: light-blue
+          - type: custom:mushroom-entity-card
+            entity: switch.humidifier
+            icon: mdi:waves-arrow-up
+            icon_color: light-blue
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: remote.harmony_hub
+            icon_color: pink
+            fill_container: false
+            primary_info: name
+            secondary_info: state
+            tap_action:
+              action: more-info
+            name: Harmony State
+          - type: custom:mushroom-entity-card
+            entity: switch.harmony_plug_socket_1
+            icon_color: pink
+            tap_action:
+              action: toggle
+        view_layout:
+          column: 2
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-update-card
+            entity: update.home_assistant_supervisor_update
+          - type: custom:mushroom-update-card
+            entity: update.file_editor_update
+          - type: custom:mushroom-update-card
+            entity: update.grafana_update
+          - type: custom:mushroom-update-card
+            entity: update.home_assistant_core_update
+          - type: custom:mushroom-update-card
+            entity: update.home_assistant_operating_system_update
+          - type: custom:mushroom-update-card
+            entity: update.influxdb_update
+          - type: custom:mushroom-update-card
+            entity: update.mariadb_update
+          - type: custom:mushroom-update-card
+            entity: update.mosquitto_broker_update
+          - type: custom:mushroom-update-card
+            entity: update.node_red_update
+          - type: custom:mushroom-update-card
+            entity: update.samba_share_update
+          - type: custom:mushroom-update-card
+            entity: update.spotify_connect_update
+          - type: custom:mushroom-update-card
+            entity: update.sqlite_web_update
+          - type: custom:mushroom-update-card
+            entity: update.studio_code_server_update
+          - type: custom:mushroom-update-card
+            entity: update.terminal_ssh_update
+        view_layout:
+          column: 1
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.daddy_s_range_rover_all_info
+            attribute: tuStatusPrimaryVolt
+            name: primary voltage
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: ApexCharts-Card
+          show_states: true
+          colorize_states: true
+        series:
+          - entity: sensor.daddy_s_range_rover_all_info
+            attribute: core status.tuStatusPrimaryVolt
+          - entity: sensor.primary_battery_voltage
+            type: line

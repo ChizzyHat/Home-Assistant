@@ -1,0 +1,441 @@
+  - theme: Backend-selected
+    title: Roku
+    path: roku
+    type: custom:horizontal-layout
+    layout:
+      max_cols: 2
+      max_width: 1000
+      width: 300
+    icon: si:roku
+    badges: []
+    cards:
+      - square: false
+        type: custom:layout-card
+        layout_type: grid
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: media_player.samsung_8_series_55
+            icon: mdi:television-box
+            name: TV Power
+            fill_container: true
+            tap_action:
+              action: call-service
+              service: script.toggle_tv
+              data: {}
+              target: {}
+            view_layout:
+              grid-area: power
+          - show_name: false
+            view_layout:
+              grid-area: c1
+            show_icon: false
+            aspect_ratio: 2/1
+            name: Home
+            show_state: false
+            type: custom:button-card
+            entity_picture: /local/Roku-Logo.png
+            show_entity_picture: true
+            entity: sensor.roku_active_app
+            color_type: card
+            state:
+              - value: Home
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Home
+                styles:
+                  card:
+                    - background-color: grey
+                    - border: solid 4px var(--secondary-background-color)
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Home
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c2
+            entity: sensor.roku_active_app
+            entity_picture: /local/2560px-Logo_of_YouTube_(2015-2017).svg.png
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            color_type: card
+            show_icon: false
+            name: Youtube
+            icon: phu:youtube
+            show_state: false
+            state:
+              - value: YouTube
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: YouTube
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: YouTube
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c3
+            entity: sensor.roku_active_app
+            entity_picture: /local/Logonetflix.png
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            name: Netflix
+            state:
+              - value: Netflix
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Netflix
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Netflix
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c4
+            entity: sensor.roku_active_app
+            entity_picture: /local/Apple_TV+_logo.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            show_icon: false
+            name: Apple TV
+            state:
+              - value: Apple TV
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Apple TV
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Apple TV
+                entity_id: media_player.roku
+            icon: phu:apple-tv
+          - type: custom:button-card
+            view_layout:
+              grid-area: c5
+            entity: sensor.roku_active_app
+            entity_picture: /local/DISCOVERY-PLUS-VERTICAL-PRIMARY-pos-rgb.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            show_icon: false
+            name: Discovery+
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: 593290
+                entity_id: media_player.roku
+            icon: phu:discovery-plus
+            show_state: false
+            state:
+              - value: 593290
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: 593290
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+          - type: custom:button-card
+            view_layout:
+              grid-area: c6
+            entity: sensor.roku_active_app
+            entity_picture: /local/hulu-logo.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            show_icon: true
+            name: hulu
+            icon: mdi:hulu
+            show_state: false
+            state:
+              - value: Hulu
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Hulu
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Hulu
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c7
+            entity: sensor.roku_active_app
+            entity_picture: /local/pngegg_sling.png
+            show_entity_picture: true
+            show_name: false
+            show_icon: false
+            aspect_ratio: 2/1
+            name: Sling TV
+            icon: /local/pngegg_sling.png
+            color_type: card
+            state:
+              - value: Sling TV
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Sling TV
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Sling TV
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c8
+            entity: sensor.roku_active_app
+            entity_picture: /local/disney-plus-logo.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            show_icon: true
+            icon: phu:disney-plus
+            name: Disney +
+            state:
+              - value: Disney Plus
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Disney Plus
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Disney Plus
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c9
+            entity: sensor.roku_active_app
+            entity_picture: /local/prime-video.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            show_icon: false
+            name: Prime Video
+            icon: phu:prime-video
+            state:
+              - value: Prime Video
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Prime Video
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Prime Video
+                entity_id: media_player.roku
+          - type: custom:button-card
+            view_layout:
+              grid-area: c10
+            entity: sensor.roku_active_app
+            entity_picture: /local/1280px-NBCUniversal_Peacock_Logo.svg.png
+            color_type: card
+            show_entity_picture: true
+            aspect_ratio: 2/1
+            show_name: false
+            name: Peacock
+            state:
+              - value: Peacock
+                styles:
+                  card:
+                    - background-color: white
+                operator: '=='
+              - value: Peacock
+                styles:
+                  card:
+                    - border: solid 4px var(--secondary-background-color)
+                    - background-color: grey
+                operator: default
+            tap_action:
+              action: call-service
+              service: media_player.select_source
+              service_data:
+                source: Peacock
+                entity_id: media_player.roku
+        layout:
+          grid-template-columns: 33% 33% 33%
+          grid-template-rows: auto
+          grid-template-areas: |
+            "power power c1" 
+            "c2 c3 c4"
+            "c5 c6 c7"
+            "c8 c9 c10"
+            "c11 c12 c13"
+        view_layout:
+          column: 1
+      - type: custom:layout-card
+        layout_type: grid
+        layout:
+          grid-template-columns: 80% 20%
+          grid-template-areas: |
+            'remote volume' 
+        cards:
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mushroom-title-card
+                title: Remote Control
+                alignment: center
+              - type: custom:roku-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      --ha-card-background: transparent;
+                      color: var(--primary-color);
+                      border: solid 4px var(--secondary-background-color)
+                    }
+                entity: media_player.roku
+                show_header_toggle: false
+                show_state: false
+            view_layout:
+              grid-area: remote
+          - type: vertical-stack
+            cards:
+              - show_name: false
+                show_icon: true
+                type: button
+                entity: media_player.living_room_2
+                icon: mdi:volume-plus
+                show_state: false
+                icon_height: 135px
+                tap_action:
+                  action: call-service
+                  service: media_player.volume_up
+                  data: {}
+                  target:
+                    entity_id:
+                      - media_player.living_room_2
+              - show_name: false
+                show_icon: true
+                type: button
+                entity: media_player.living_room_2
+                icon: mdi:volume-minus
+                tap_action:
+                  action: call-service
+                  service: media_player.volume_down
+                  data: {}
+                  target:
+                    entity_id: media_player.living_room_2
+                icon_height: 135px
+              - show_name: false
+                show_icon: true
+                type: button
+                entity: media_player.living_room_2
+                icon: mdi:volume-mute
+                icon_height: 135px
+                tap_action:
+                  action: call-service
+                  service: media_player.volume_mute
+                  data:
+                    is_volume_muted: false
+                  target:
+                    entity_id: media_player.living_room_2
+            view_layout:
+              grid-area: volume
+        view_layout:
+          column: 2
+      - type: custom:layout-card
+        layout_type: grid
+        cards:
+          - show_name: true
+            show_icon: true
+            entity: media_player.zone_12
+            type: button
+            tap_action:
+              action: call-service
+              service: script.roku_in_kitchen
+              data: {}
+              target: {}
+            show_state: false
+            icon: mdi:speaker-wireless
+            name: Kitchen
+            view_layout:
+              grid-area: button
+          - entity: media_player.zone_12
+            type: custom:mushroom-media-player-card
+            show_volume_level: true
+            volume_controls:
+              - volume_buttons
+            media_controls: []
+            fill_container: false
+            name: Kitchen Volume
+            icon: mdi:volume-high
+            collapsible_controls: false
+            view_layout:
+              grid-area: media
+        layout:
+          grid-template-columns: 22% 78%
+          grid-template-areas: |
+            'button media' 
+        view_layout:
+          column: 2

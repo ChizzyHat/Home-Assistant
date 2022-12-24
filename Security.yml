@@ -1,0 +1,130 @@
+  - theme: Backend-selected
+    title: Cameras
+    path: cameras
+    visible:
+      - user: 82be2dc259e84bde90b6af38554ade54
+      - user: 07e899195ac0425f9fdc328950e516b9
+      - user: ac0fee36d0cd471fb735592659eb5e3f
+      - user: 7636aa83482a430b84ca92bf119ac27a
+      - user: 3ef5af91e08e4644a0fc798df9d3cd90
+      - user: b1da9ec41bbc4487bd72480e96b8d6f4
+      - user: 8f29bf8fd52b484f9c1e3f7cbee79a6b
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 19.5% 80.5%
+      grid-template-rows: auto
+      grid-template-areas: |
+        "badges badges"
+        "sidebar cycle"
+      mediaquery:
+        '(max-width: 1170px)':
+          grid-template-columns: 100%
+          grid-template-areas: |
+            "sidebar"
+    icon: mdi:cctv
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - camera_view: live
+            type: picture-glance
+            title: Driveway
+            entities:
+              - entity: binary_sensor.name_driveway_motion
+            camera_image: camera.name_driveway
+            entity: camera.name_driveway
+          - camera_view: live
+            type: picture-glance
+            title: Patio
+            entities:
+              - entity: binary_sensor.name_back_patio_motion
+            camera_image: camera.name_back_patio
+            entity: camera.name_back_patio
+          - camera_view: live
+            type: picture-glance
+            title: Front Door
+            entities:
+              - entity: binary_sensor.name_front_porch_motion
+            camera_image: camera.name_front_porch
+            entity: camera.name_front_porch
+          - camera_view: live
+            type: picture-glance
+            title: Grilling Porch
+            entities:
+              - entity: binary_sensor.name_grill_porch_motion
+            camera_image: camera.name_grill_porch
+            entity: camera.name_grill_porch
+      - camera_view: auto
+        type: picture-glance
+        title: Cycle
+        entities: []
+        camera_image: camera.name_all_cameras_cycle
+        view_layout:
+          column: 2
+      - type: custom:popup-card
+        entity: camera.name_driveway
+        title: Driveway Camera
+        dismissable: true
+        size: fullscreen
+        card:
+          camera_view: live
+          type: picture-glance
+          entities:
+            - sensor.date_time
+            - sensor.date_time_utc
+          camera_image: camera.name_driveway
+      - type: custom:popup-card
+        entity: camera.name_back_patio
+        title: Driveway Camera
+        dismissable: true
+        size: fullscreen
+        card:
+          camera_view: live
+          type: picture-glance
+          entities:
+            - sensor.date_time
+            - sensor.date_time_utc
+          camera_image: camera.name_back_patio
+      - type: custom:popup-card
+        entity: camera.name_grill_porch
+        title: Driveway Camera
+        dismissable: true
+        size: fullscreen
+        card:
+          camera_view: live
+          type: picture-glance
+          entities:
+            - sensor.date_time
+            - sensor.date_time_utc
+          camera_image: camera.name_grill_porch
+      - type: custom:popup-card
+        entity: camera.name_front_porch
+        title: Driveway Camera
+        dismissable: true
+        size: fullscreen
+        card:
+          camera_view: live
+          type: picture-glance
+          entities:
+            - sensor.date_time
+            - sensor.date_time_utc
+          camera_image: camera.name_front_porch
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.name_back_patio_motion
+            name: Patio
+            fill_container: false
+            icon_color: red
+            layout: horizontal
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.name_driveway_motion
+            name: Driveway
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.name_grill_porch_motion
+            name: Grill Porch
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.name_front_porch_motion
+            name: Front Door
+        view_layout:
+          grid-area: badges

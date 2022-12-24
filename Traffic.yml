@@ -1,0 +1,299 @@
+  - theme: Backend-selected
+    title: Traffic
+    path: mapa
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 25% 50% 25%
+      grid-template-rows: auto
+      grid-template-areas: |
+        "sidebar map sidebarR"
+      mediaquery:
+        '(min-width: 1920px)':
+          grid-template-columns: 25% 50% 25%
+          grid-template-areas: |
+            "sidebar map sidebarR"
+        '(max-width: 1170px)':
+          grid-template-columns: 100%
+          grid-template-areas: |
+            "sidebar"
+            "sidebarR"
+    visible:
+      - user: 82be2dc259e84bde90b6af38554ade54
+      - user: 3ef5af91e08e4644a0fc798df9d3cd90
+      - user: ac0fee36d0cd471fb735592659eb5e3f
+      - user: 07e899195ac0425f9fdc328950e516b9
+      - user: 7636aa83482a430b84ca92bf119ac27a
+      - user: b1da9ec41bbc4487bd72480e96b8d6f4
+      - user: 8f29bf8fd52b484f9c1e3f7cbee79a6b
+    icon: mdi:waze
+    badges: []
+    cards:
+      - type: iframe
+        url: >-
+          https://embed.waze.com/iframe?zoom=13&lat=##.######&lon=-##.######&ct=livemap 
+        aspect_ratio: '8:10'
+        view_layout:
+          grid-area: map
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: entities
+                card_mod:
+                  style: |
+                    ha-card {
+                      color: var(--primary-text-color);
+                    }
+                    :host {
+                      {% if states('sensor.kfty_temperature') | float > 80.0 %}
+                        --paper-item-icon-color: red;
+                      {% elif states('sensor.kfty_temperature') | float > 75 %}
+                        --paper-item-icon-color: orange;
+                      {% elif states('sensor.kfty_temperature') | float > 55 %}
+                        --paper-item-icon-color: green;
+                      {% elif states('sensor.kfty_temperature') | float > 5 %}
+                        --paper-item-icon-color: cyan;
+                      {% endif %}
+                    }
+                entities:
+                  - type: custom:multiple-entity-row
+                    name: Current
+                    entity: sensor.timenew
+                    icon: mdi:thermometer-lines
+                    entities:
+                      - entity: sensor.kfty_temperature
+                        name: Temperature
+                      - entity: sensor.kfty_heat_index
+                        name: Heat Index
+                      - entity: sensor.kfty_wind_chill
+                        name: Wind Chill
+                  - type: divider
+                    style:
+                      height: 2px
+                      width: 100%
+                      margin-left: auto
+                      margin-right: auto
+                      background: aqua
+              - type: custom:apexcharts-card
+                graph_span: 48h
+                update_interval: 10min
+                span:
+                  start: day
+                  offset: '-24h'
+                apex_config:
+                  chart:
+                    height: 200px
+                now:
+                  show: true
+                  color: var(--primary-color)
+                  label: Now
+                header:
+                  show: true
+                  title: School1 Travel Time
+                  show_states: true
+                  colorize_states: true
+                series:
+                  - entity: sensor.school1
+                    stroke_width: 1
+                    extend_to: end
+                    color: RED
+                    curve: smooth
+                    type: area
+                    opacity: 0.3
+                    show:
+                      extremas: true
+                    group_by:
+                      func: avg
+                  - entity: sensor.average_travel_time_school1
+                    stroke_width: 1
+                    extend_to: end
+                    color: CYAN
+                    curve: smooth
+                    type: area
+                    opacity: 0.1
+                    show:
+                      extremas: true
+                    group_by:
+                      func: avg
+              - type: custom:apexcharts-card
+                span:
+                  start: day
+                  offset: '-24h'
+                graph_span: 48h
+                update_interval: 10min
+                apex_config:
+                  chart:
+                    height: 200px
+                now:
+                  show: true
+                  color: var(--primary-color)
+                  label: Now
+                header:
+                  show: true
+                  title: School2 Travel Time
+                  show_states: true
+                  colorize_states: true
+                series:
+                  - entity: sensor.school2
+                    stroke_width: 1
+                    extend_to: end
+                    curve: smooth
+                    color: RED
+                    type: area
+                    opacity: 0.3
+                    show:
+                      extremas: true
+                    group_by:
+                      func: avg
+                  - entity: sensor.average_travel_time_school2
+                    stroke_width: 1
+                    extend_to: end
+                    curve: smooth
+                    color: '#03a9f4'
+                    type: area
+                    opacity: 0.1
+                    show:
+                      extremas: true
+                    group_by:
+                      func: avg
+              - type: entity
+                entity: sensor.daddy_s_range_rover_status
+                name: Range Rover Status
+                state_color: true
+                theme: Caule Light Yellow
+        view_layout:
+          grid-area: sidebar
+      - type: custom:stack-in-card
+        view_layout:
+          grid-area: sidebarR
+        cards:
+          - type: custom:apexcharts-card
+            update_interval: 12min
+            graph_span: 48h
+            span:
+              start: day
+              offset: '-24h'
+            now:
+              show: true
+              color: var(--primary-color)
+              label: Now
+            header:
+              show: true
+              title: Round Trip
+              show_states: true
+              colorize_states: true
+            apex_config:
+              chart:
+                height: 200px
+            series:
+              - entity: sensor.round_trip_h2p
+                name: School1 -> School2
+                stroke_width: 1
+                extend_to: end
+                curve: smooth
+                color: white
+                type: area
+                opacity: 0.2
+                group_by:
+                  func: avg
+              - entity: sensor.round_trip
+                name: School2 -> School1
+                color: orange
+                curve: smooth
+                stroke_width: 1
+                extend_to: end
+                type: area
+                opacity: 0.2
+                group_by:
+                  func: avg
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: entity
+                entity: sensor.gym
+              - chart_type: line
+                period: hour
+                days_to_show: 1.5
+                type: statistics-graph
+                entities:
+                  - sensor.gym
+                stat_types:
+                  - max
+                  - min
+                  - mean
+          - type: custom:apexcharts-card
+            update_interval: 12min
+            graph_span: 168h
+            span:
+              start: day
+              offset: '-160h'
+            now:
+              show: true
+              color: var(--primary-color)
+              label: Now
+            header:
+              show: true
+              title: Lake
+              show_states: true
+              colorize_states: true
+            apex_config:
+              chart:
+                height: 200px
+            series:
+              - entity: sensor.waze_travel_time
+                name: Lake
+                stroke_width: 1
+                extend_to: end
+                curve: smooth
+                color: '#ff2400'
+                type: area
+                opacity: 0.2
+                show:
+                  extremas: true
+                group_by:
+                  func: avg
+          - type: custom:mini-graph-card
+            hours_to_show: 12
+            height: 100
+            line_color: var(--accent-color)
+            color_thresholds:
+              - value: 15
+                color: red
+              - value: 12
+                color: orange
+              - value: 8
+                color: green
+            color_thresholds_transition: smooth
+            smoothing: true
+            animate: true
+            show:
+              icon: true
+              graph: line
+              fill: true
+              state: true
+              legend: true
+              labels: true
+            line_width: 0.5
+            update_interval: 6min
+            show_line: true
+            align_state: right
+            points_per_hour: 12
+            entities:
+              - entity: sensor.gym
+                name: GYM
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entity
+            entity: sensor.gym
+          - chart_type: line
+            period: hour
+            days_to_show: 2
+            type: statistics-graph
+            entities:
+              - sensor.gym
+            stat_types:
+              - max
+              - min
+              - mean
+      - type: entity
+        entity: sensor.daddy_s_range_rover_all_info
+        attribute: attributes

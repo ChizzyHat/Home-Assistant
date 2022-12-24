@@ -1,0 +1,7 @@
+#### This allows for swipe navigation on mobile devices - this goes in the dashboard's root in the yaml file
+
+swipe_nav:
+  wrap: false
+  animate: flip
+  prevent_default: true
+  swipe_amount: 15

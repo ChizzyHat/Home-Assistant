@@ -1,0 +1,588 @@
+  - theme: Backend-selected
+    title: Car
+    path: car
+    icon: mdi:car-estate
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 25% 75%
+      grid-template-rows: auto
+      grid-template-areas: |
+        'padFire rr'
+      mediaquery:
+        '(min-width: 1920px)':
+          grid-template-columns: 35% 65%
+          grid-template-rows: auto
+          grid-template-areas: |
+            'pad rr'
+        '(min-width: 1280px)':
+          grid-template-columns: 25% 75%
+          grid-template-rows: auto
+          grid-template-areas: |
+            'padFire rr''
+        '(max-width: 1170px)':
+          grid-template-columns: 100%
+          grid-template-rows: auto
+          grid-template-areas: |
+            'pad'
+            'rr'
+    badges: []
+    cards:
+                            #################### the following conditional (the keypad) repeats a number of times because it rotates the numbers in the grid
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: input_text.pad
+                state: '4'
+            card:
+              square: true
+              columns: 12
+              type: grid
+              cards:
+                - type: custom:button-card
+                  entity: input_text.1
+                  entity_picture: /local/number-1.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '1'
+                      entity_id: input_text.1
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '1'
+                      color: '#f1f2f7'
+                    - value: '1'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.2
+                  entity_picture: /local/number-2.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '2'
+                      entity_id: input_text.2
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '2'
+                      color: '#f1f2f7'
+                    - value: '2'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.7
+                  entity_picture: /local/number-7.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '7'
+                      entity_id: input_text.7
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '7'
+                      color: '#f1f2f7'
+                    - value: '7'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.4
+                  entity_picture: /local/number-4.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '4'
+                      entity_id: input_text.4
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '4'
+                      color: '#f1f2f7'
+                    - value: '4'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.9
+                  entity_picture: /local/number-9.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '9'
+                      entity_id: input_text.9
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '9'
+                      color: '#f1f2f7'
+                    - value: '9'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.3
+                  entity_picture: /local/number-3.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '3'
+                      entity_id: input_text.3
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '3'
+                      color: '#f1f2f7'
+                    - value: '3'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.0
+                  entity_picture: /local/number-0.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '0'
+                      entity_id: input_text.0
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '0'
+                      color: '#f1f2f7'
+                    - value: '0'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.8
+                  entity_picture: /local/number-8.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '8'
+                      entity_id: input_text.8
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '8'
+                      color: '#f1f2f7'
+                    - value: '8'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.6
+                  entity_picture: /local/number-6.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '6'
+                      entity_id: input_text.6
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '6'
+                      color: '#f1f2f7'
+                    - value: '6'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.5
+                  entity_picture: /local/number-5.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '5'
+                      entity_id: input_text.5
+                  color_type: card
+                  state:
+                    - operator: '!='
+                      value: '5'
+                      color: '#f1f2f7'
+                    - value: '5'
+                      color: yellow
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: input_text.pad
+                  entity_picture: /local/reset.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: input_text.set_value
+                    service_data:
+                      value: '1'
+                      entity_id: input_text.pad
+                  color_type: card
+                  color: '#f1f2f7'
+                  aspect_ratio: 1/1
+                - type: custom:button-card
+                  entity: sensor.daddy_s_range_rover_info
+                  entity_picture: /local/rr_top.png
+                  show_entity_picture: true
+                  show_name: false
+                  tap_action:
+                    action: call-service
+                    service: jlrincontrol.update_health_status
+                    service_data:
+                      entity_id: sensor.daddy_s_range_rover_info
+                  color_type: card
+                  color: '#f1f2f7'
+                  aspect_ratio: 1/1
+          
+         
+          - type: iframe
+            url: >-
+              https://embed.waze.com/iframe?zoom=13&lat=##.#########&lon=-##.#######&ct=livemap
+            aspect_ratio: '3:2'
+          - type: custom:weather-radar-card
+            show_recenter: true
+            square_map: true
+            extra_labels: true
+            show_zoom: true
+            show_range: true
+            show_scale: false
+            show_marker: false
+            static_map: false
+            map_style: Light
+            zoom_level: 7
+        view_layout:
+          grid-area: pad
+      - type: picture-elements
+        view_layout:
+          grid-area: rr
+        elements:
+          - type: service-button
+            title: Lock Doors
+            service: script.lock_doors
+            style:
+              top: '-5%'
+              left: 40%
+              background: var(--ha-card-background)
+              '--mdc-typography-button-font-size': 16px
+              '--mdc-theme-primary': var(--primary-text-color)
+              border-radius: 10px
+              transform: scale(1.5,1.5)
+          - type: service-button
+            title: Start Car
+            service: script.start_car
+            style:
+              top: '-5%'
+              left: 75%
+              '--mdc-theme-primary': var(--primary-text-color)
+              '--mdc-theme-secondary': var(--primary-text-color)
+              background: var(--ha-card-background)
+              '--mdc-typography-button-font-size': 16px
+              border-radius: 10px
+              transform: scale(1.5,1.5)
+          - type: image
+            image: /local/rr_top.png
+            title: bang
+            style:
+              top: 7%
+              left: 6%
+              width: 10%
+              transform: translate(-50%,-50%) rotate(-0.5turn)
+          - type: state-icon
+            entity: lock.daddy_s_range_rover_doors
+            tap_action: more_info
+            state_color: false
+            style:
+              '--paper-item-icon-color': green
+              '--paper-item-icon-active-color': red
+              left: '-2%'
+              top: 90%
+              transform: scale(2,2)
+          - type: state-label
+            entity: lock.daddy_s_range_rover_doors
+            style:
+              left: 0%
+              top: 101%
+              font-size: 20px
+          - type: state-icon
+            entity: sensor.daddy_s_range_rover_windows
+            tap_action: more_info
+            style:
+              '--paper-item-icon-active-color': red
+              '--paper-item-icon-color': green
+              left: 18%
+              top: 90%
+              transform: scale(2,2)
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_windows
+            style:
+              left: 20%
+              top: 101%
+              font-size: 20px
+          - type: state-icon
+            icon: mdi:security
+            entity: sensor.daddy_s_range_rover_alarm
+            tap_action: more_info
+            style:
+              '--paper-item-icon-active-color': red
+              '--paper-item-icon-color': green
+              left: 38%
+              top: 90%
+              transform: scale(2,2)
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_alarm
+            style:
+              left: 40%
+              top: 101%
+              font-size: 20px
+          - type: state-icon
+            entity: sensor.daddy_s_range_rover_range
+            tap_action: more_info
+            style:
+              left: 58%
+              top: 90%
+              transform: scale(2,2)
+              color: var(--my-fuel-color)
+              '--paper-item-icon-color': var(--my-fuel-color)
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_range
+            attribute: Fuel Level
+            style:
+              left: 60%
+              top: 105%
+              font-size: 20px
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_range
+            style:
+              left: 60%
+              top: 101%
+              font-size: 20px
+          - type: state-icon
+            entity: sensor.daddy_s_range_rover_service_info
+            tap_action: more_info
+            style:
+              '--paper-item-icon-active-color': red
+              '--paper-item-icon-color': green
+              left: 78%
+              top: 90%
+              transform: scale(2,2)
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            attribute: Distance To Service
+            style:
+              left: 80%
+              top: 101%
+              font-size: 20px
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            style:
+              left: 80%
+              top: 105%
+              font-size: 20px
+          - type: state-icon
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Rear Left Pressure (psi)
+            style:
+              top: 12%
+              left: '-4%'
+              transform: scale(1.5,1.5)
+              color: var(--my-RL-color)
+              '--paper-item-icon-color': var(--my-RL-color)
+          - type: state-label
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Rear Left Pressure (psi)
+            style:
+              top: 15%
+              font-size: 20px
+              left: '-8%'
+              color: var(--my-RL-color)
+          - type: state-icon
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Rear Right Pressure (psi)
+            style:
+              top: 12%
+              left: 12%
+              transform: scale(1.5,1.5)
+              color: var(--my-RR-color)
+              '--paper-item-icon-color': var(--my-RR-color)
+          - type: state-label
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Rear Right Pressure (psi)
+            style:
+              font-size: 20px
+              top: 15%
+              left: 20%
+              color: var(--my-RR-color)
+          - type: state-icon
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Front Left Pressure (psi)
+            style:
+              top: '-5%'
+              left: '-4%'
+              transform: scale(1.5,1.5)
+              color: var(--my-FL-color)
+              '--paper-item-icon-color': var(--my-FL-color)
+          - type: state-label
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Front Left Pressure (psi)
+            style:
+              top: '-2%'
+              left: '-8%'
+              color: var(--my-FL-color)
+              font-size: 20px
+          - type: state-icon
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Front Right Pressure (psi)
+            style:
+              top: '-5%'
+              left: 12%
+              color: var(--my-FR-color)
+              transform: scale(1.5,1.5)
+              '--paper-item-icon-color': var(--my-FR-color)
+          - type: state-label
+            icon: mdi:car-tire-alert
+            entity: sensor.daddy_s_range_rover_tyres
+            attribute: Front Right Pressure (psi)
+            style:
+              top: '-2%'
+              left: 20%
+              color: var(--my-FR-color)
+              font-size: 20px
+          - type: state-icon
+            icon: mdi:car-brake-fluid-level
+            entity: sensor.daddy_s_range_rover_service_info
+            style:
+              top: 35%
+              left: '-15%'
+              transform: scale(1,1)
+              '--paper-item-icon-color': green
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            attribute: Brake Fluid
+            style:
+              top: 39%
+              left: '-6%'
+              font-size: 16px
+              color: green
+          - type: state-icon
+            icon: mdi:car-coolant-level
+            entity: sensor.daddy_s_range_rover_service_info
+            style:
+              top: 45%
+              left: '-15%'
+              transform: scale(1,1)
+              '--paper-item-icon-color': green
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            attribute: Coolant Level
+            style:
+              top: 49%
+              left: '-6%'
+              font-size: 16px
+              color: green
+          - type: state-icon
+            icon: mdi:oil-level
+            entity: sensor.daddy_s_range_rover_service_info
+            style:
+              top: 55%
+              left: '-15%'
+              transform: scale(1,1)
+              '--paper-item-icon-color': green
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            attribute: Oil Level
+            style:
+              top: 59%
+              left: '-6%'
+              font-size: 16px
+              color: green
+          - type: state-icon
+            icon: mdi:wiper-wash-alert
+            entity: sensor.daddy_s_range_rover_service_info
+            style:
+              top: 65%
+              left: '-15%'
+              transform: scale(1,1)
+              '--paper-item-icon-color': green
+          - type: state-label
+            entity: sensor.daddy_s_range_rover_service_info
+            attribute: Washer Fluid
+            style:
+              top: 69%
+              left: '-6%'
+              font-size: 16px
+              color: green
+        image: /local/Range-Rover-PNG-File.png
+        style: |
+          ha-card { 
+            width: 100%;
+            bottom: 220px;
+            top: 0px;
+            padding: 10% 0% 5% 15%;
+            margin: auto;
+            {% if state_attr('sensor.daddy_s_range_rover_tyres','Rear Right Pressure (psi)') |float > 42 %}
+            --my-RR-color: green; 
+            {% elif state_attr('sensor.daddy_s_range_rover_tyres','Rear Right Pressure (psi)') |float > 39 %}
+            --my-RR-color: #FF5E0E;
+            {% else %}
+            --my-RR-color: red;
+            {% endif %}
+            {% if state_attr('sensor.daddy_s_range_rover_tyres','Rear Left Pressure (psi)') |float > 42 %}
+            --my-RL-color: green; 
+            {% elif state_attr('sensor.daddy_s_range_rover_tyres','Rear Left Pressure (psi)') |float > 39 %}
+            --my-RL-color: #FF5E0E;
+            {% else %}
+            --my-RL-color: red;
+            {% endif %}
+            {% if state_attr('sensor.daddy_s_range_rover_tyres','Front Left Pressure (psi)') |float > 36 %}
+            --my-FL-color: green; 
+            {% elif state_attr('sensor.daddy_s_range_rover_tyres','Front Left Pressure (psi)') |float > 34 %}
+            --my-FL-color: #FF5E0E;
+            {% else %}
+            --my-FL-color: red;
+            {% endif %}
+            {% if state_attr('sensor.daddy_s_range_rover_tyres','Front Right Pressure (psi)') |float > 36 %}
+            --my-FR-color: green; 
+            {% elif state_attr('sensor.daddy_s_range_rover_tyres','Front Right Pressure (psi)') |float > 34 %}
+            --my-FR-color: #FF5E0E;
+            {% else %}
+            --my-FR-color: red;
+            {% endif %}
+             {% if states('sensor.daddy_s_range_rover_range') |float > 285 %}
+            --my-fuel-color: green; 
+            {% elif states('sensor.daddy_s_range_rover_range') |float > 190 %}
+            --my-fuel-color: #f7c707;
+            {% elif states('sensor.daddy_s_range_rover_range') |float > 95 %}
+            --my-fuel-color: #FF5E0E;
+            {% else %}
+            --my-fuel-color: red;
+            {% endif %}

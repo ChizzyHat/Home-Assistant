@@ -1,0 +1,290 @@
+  - theme: Backend-selected
+    title: music
+    path: music4
+    layout:
+      grid-template-columns: 33% 33% 33%
+      grid-template-rows: auto
+      grid-template-areas: |
+        'sonos library echo'
+      mediaquery:
+        '(min-width: 1920px)':
+          grid-template-columns: 33% 33% 33%
+          grid-template-rows: auto
+          grid-template-areas: |
+            'sonos library echo'
+        '(min-width: 1280px)':
+          grid-template-columns: 33% 33% 33%
+          grid-template-rows: 210px auto
+          grid-template-areas: |
+            'sonos library echo'
+        '(max-width: 1170px)':
+          grid-template-columns: 100%
+          grid-template-rows: auto
+          grid-template-areas: |
+            "librarym"
+            "echo"
+            "sonos"
+    type: custom:grid-layout
+    icon: si:spotify
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-title-card
+                title: Music - Common Areas
+                subtitle: ''
+          - type: media-control
+            entity: media_player.sonos
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mini-media-player
+                entity: media_player.living_room_2
+                volume_stateless: false
+                source: full
+                group: true
+                artwork: material
+                icon: mdi:speaker
+                sound_mode: icon
+                name: Living Room
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                idle_view:
+                  when_idle: false
+                  when_paused: false
+                  when_standby: false
+              - type: custom:mini-media-player
+                volume_stateless: false
+                sound_mode: full
+                source: full
+                show_entity_picture: true
+                group: true
+                entity: media_player.zone_12
+                name: Kitchen
+                max_volume: '75'
+                scale: '1.5'
+                artwork: cover-fit
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+                hide:
+                  power: false
+              - type: custom:mini-media-player
+                volume_stateless: false
+                source: full
+                name: Patio
+                group: true
+                entity: media_player.zone_13
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+              - type: custom:mini-media-player
+                volume_stateless: false
+                source: full
+                group: true
+                name: Grilling Porch
+                artwork: material
+                entity: media_player.zone_14
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+        view_layout:
+          grid-area: sonos
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: Music - Individual Echos
+            subtitle: ''
+          - type: media-control
+            entity: media_player.spotify_chizzyhat
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: custom:mini-media-player
+                entity: media_player.michelle_s_3rd_echo
+                volume_stateless: false
+                source: icon
+                group: true
+                artwork: none
+                icon: mdi:speaker
+                sound_mode: icon
+                name: Office Echo
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                  source: true
+                  controls: false
+                  prev: true
+                  next: true
+                  play_pause: true
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+              - type: custom:mini-media-player
+                volume_stateless: false
+                sound_mode: icon
+                source: icon
+                show_entity_picture: true
+                group: true
+                entity: media_player.michelle_s_echo
+                icon: mdi:speaker
+                name: Bathroom Echo
+                max_volume: '75'
+                scale: '1.5'
+                artwork: none
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+                hide:
+                  power: false
+                  source: true
+                  controls: false
+                  prev: true
+                  next: true
+                  play_pause: true
+              - type: custom:mini-media-player
+                volume_stateless: false
+                source: icon
+                icon: mdi:speaker
+                name: Charlie's Echo
+                group: true
+                entity: media_player.michelle_s_2nd_echo
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                  source: true
+                  controls: false
+                  prev: true
+                  next: true
+                  play_pause: true
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+              - type: custom:mini-media-player
+                volume_stateless: false
+                source: icon
+                group: true
+                icon: mdi:speaker
+                name: Katelyn's Echo
+                artwork: none
+                entity: media_player.michelle_s_echo_dot
+                max_volume: '75'
+                scale: '1.5'
+                hide:
+                  power: false
+                  source: true
+                  controls: false
+                  prev: true
+                  next: true
+                  play_pause: true
+                idle_view:
+                  when_idle: true
+                  when_paused: true
+                  when_standby: true
+        view_layout:
+          grid-area: echo
+      - type: custom:spotify-card
+        limit: 50
+        height: 800
+        playlist_type: default
+        always_play_random_song: true
+        hide_chromecast_devices: true
+        display_style: grid
+        grid_covers_per_row: '4'
+        grid_show_title: false
+        hide_top_header: true
+        hide_playback_controls: true
+        default_device: Office Echo
+        known_connect_devices: null
+        filter_devices:
+          - media_player.michelle_s_2nd_echo
+          - media_player.michelle_s_echo_dot
+          - Charlies.*
+          - Katel.*
+          - NA.*
+          - Kitchen.*
+          - .*2nd.*
+          - .*3rd.*
+          - .*speaker
+        view_layout:
+          grid-area: library
+      - type: custom:spotify-card
+        limit: 50
+        playlist_type: default
+        always_play_random_song: true
+        hide_chromecast_devices: true
+        display_style: grid
+        grid_covers_per_row: '3'
+        height: 400
+        grid_show_title: false
+        hide_top_header: true
+        hide_playback_controls: true
+        default_device: Office Echo
+        known_connect_devices: null
+        filter_devices:
+          - media_player.michelle_s_2nd_echo
+          - media_player.michelle_s_echo_dot
+          - Charlies.*
+          - Katel.*
+          - NA.*
+          - Kitchen.*
+          - .*2nd.*
+          - .*speaker
+          - .*3rd.*
+        view_layout:
+          grid-area: librarym
+      - type: custom:spotify-card
+        limit: 50
+        playlist_type: default
+        always_play_random_song: true
+        hide_chromecast_devices: true
+        display_style: grid
+        grid_covers_per_row: '8'
+        height: 400
+        grid_show_title: false
+        hide_top_header: true
+        hide_playback_controls: true
+        default_device: Office Echo
+        known_connect_devices: null
+        filter_devices:
+          - media_player.michelle_s_2nd_echo
+          - media_player.michelle_s_echo_dot
+          - Charlies.*
+          - Katel.*
+          - NA.*
+          - Kitchen.*
+          - .*2nd.*
+          - .*speaker
+          - .*3rd.*
+        view_layout:
+          grid-area: libraryd
+      - type: custom:mini-media-player
+        entity: media_player.spotify_chizzyhat
+        artwork: full-cover
+        hide:
+          icon: true
+          power: true
+          controls: true
+          volume: true
+          source: true
+          info: true
+        view_layout:
+          grid-area: playing
